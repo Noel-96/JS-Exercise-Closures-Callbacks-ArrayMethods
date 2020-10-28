@@ -28,9 +28,16 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * Counter 1 is nested inside of the function called "counterMaker", where count2 however is not which makes it a global variable.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ * counter1 uses closure, as the variable count was set within the function.
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * counter1 is generally preferable because it is less memory due to being private. It also retains memeory. However, if you need the count to be reset every time, 
+ * counter2 would be better.
  *
 */
 
@@ -56,15 +63,16 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
+  return Math.round(Math.random() * 3);
 
 }
 
 /* Task 3: finalScore()
 
-Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
+Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and 
+and returns the final score of the game in the form of an object.
 
 For example, 
 
@@ -76,9 +84,17 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
+function finalScore(inning, num ){
+  let home = 0;
+  let away = 0;
+  for (let i = 1; i <= num; i++) {
+    home += inning();
+    away += inning();
+  }
+  return {
+    "Home": home,
+    "Away": away,
+  }
 
 }
 
@@ -104,8 +120,26 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScore ,inning, num ) {
+  const final = {
+    home: 0, away: 0
+  }
+  for (let i = 1; i <= num; i++) {
+    final.home += inning();
+    final.away += inning();
+
+    getInningScore(i, final)
+  }
+  return final;
 }
+
+function getInningScore (inning, scoreboard) {
+  console.log(`Inning ${inning}: Home: ${scoreboard.home} Away: ${scoreboard.away}`)
+}
+
+console.log(scoreboard(getInningScore, inning, 10))
+
+
+
 
 

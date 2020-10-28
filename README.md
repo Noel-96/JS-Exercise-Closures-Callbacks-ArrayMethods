@@ -44,6 +44,11 @@ Find the file `index.js` and complete the tasks until your tests are passing.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+
+
+ A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).
+
+
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -65,8 +70,13 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+Closure is used within the personalDice function when using the variable const = newRoll.
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+The name will  be the same but the roll number  will change
+
 c. What is the lexical scope of `newRoll`? 
+newRoll is nested within the  return funtion of personalDice .
 
 ### Task 3 - Stretch Goals
 
